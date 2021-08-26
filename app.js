@@ -23,9 +23,13 @@ const incomeTitle = document.querySelector("#income-title-input");
 const incomeAmount = document.querySelector("#income-amount-input");
 
 //necessary variables
-let ENTRY_LIST = [];
+//let ENTRY_LIST = [];
+let ENTRY_LIST;
 let [balance, income, outcome] = [0, 0, 0];
 let [deleteIcon, editIcon] = ["fas fa-trash", "far fa-edit"];
+
+ENTRY_LIST = JSON.parse(localStorage.getItem("entry-list")) || [];
+updateUI();
 
 //expenseBtn event listenrer
 expenseBtn.addEventListener("click", function () {
@@ -120,6 +124,8 @@ function updateUI() {
   });
 
   updateChart(income, outcome);
+
+  localStorage.setItem("entry-list", JSON.stringify(ENTRY_LIST));
 }
 
 //showEntry function
