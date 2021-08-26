@@ -51,6 +51,51 @@ allBtn.addEventListener("click", function () {
   inactive([incomeBtn, expenseBtn]);
 });
 
+//addExpense event listener
+addExpense.addEventListener("click", budgetOut);
+
+//add Income event listener
+addIncome.addEventListener("click", budgetIn);
+
+//addExpense addIncome EnterKey event listenrer
+document.addEventListener("keypress", function (e) {
+  if (e.key !== "Enter") return;
+  budgetOut(e);
+  budgetIn(e);
+});
+
+//bugdetOut function
+function budgetOut(e) {
+  e.preventDefault();
+  if (!expenseTitle.value || !expenseAmount.value) return;
+  let expense = {
+    type: "expense",
+    title: expenseTitle.value,
+    amount: parseInt(expenseAmount.value),
+  };
+  ENTRY_LIST.push(expense);
+
+  updateUI();
+  clearInput([expenseTitle, expenseAmount]);
+}
+
+//budgetIn function
+function budgetIn(e) {
+  e.preventDefault();
+  if (!incomeTitle.value || !incomeAmount.value) return;
+
+  let income = {
+    type: "income",
+    title: incomeTitle.value,
+    amount: parseFloat(incomeAmount.value),
+  };
+  ENTRY_LIST.push(income);
+  console.log(income);
+
+  updateUI();
+  clearInput([incomeTitle, incomeAmount]);
+}
+
 //show function
 function show(element) {
   element.classList.remove("hide");
