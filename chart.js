@@ -10,7 +10,7 @@ chart.appendChild(canvas);
 //initializing a 2d context
 const context2D = canvas.getContext("2d");
 
-context2D.linewidth = 10;
+context2D.linewidth = 40;
 
 const radius = 50;
 
@@ -22,5 +22,13 @@ function drawCircle(color, ratio, anticlockwise) {
   context2D.stroke();
 }
 
-drawCircle("red", 0.25, false);
-drawCircle("green", 0.25, true);
+//drawCircle("red", 0.25, false);
+//drawCircle("green", 0.25, true);
+
+function updateChart(income, outcome) {
+  context2D.clearRect(0, 0, canvas.width, canvas.height);
+  let ratio = income / (income + outcome);
+
+  drawCircle("lawngreen", -ratio, true);
+  drawCircle("tomato", 1 - ratio, false);
+}
