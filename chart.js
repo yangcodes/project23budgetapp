@@ -10,7 +10,7 @@ chart.appendChild(canvas);
 //initializing a 2d context
 const context2D = canvas.getContext("2d");
 
-context2D.linewidth = 40;
+context2D.lineWidth = 10;
 
 const radius = 50;
 
