@@ -109,6 +109,15 @@ function updateUI() {
   balanceEl.innerHTML = `<p>${sign}</p><p>${balance}</p>`;
 
   clearElement([expenseList, incomeList, allList]);
+
+  ENTRY_LIST.forEach(function (entry, index) {
+    if (entry.type === "expense") {
+      showEntry(expenseList, entry.type, entry.title, entry.amount, index);
+    } else if (entry.type === "income") {
+      showEntry(incomeList, entry.type, entry.title, entry.amount, index);
+    }
+    showEntry(allList, entry.type, entry.title, entry.amount, index);
+  });
 }
 
 //showEntry function
@@ -125,7 +134,7 @@ function showEntry(list, type, title, amount, id) {
 }
 
 //clearElememnt function
-function clearElememnt(elements) {
+function clearElement(elements) {
   elements.forEach(function (element) {
     element.innerHTML = "";
   });
