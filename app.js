@@ -1,9 +1,9 @@
-const balanceEl = document.querySelector(".balance.value");
+const balanceEl = document.querySelector(".balance .value");
 const incomeTotalEl = document.querySelector(".income-total");
-const outcomeTotalEl = document.querySelector(".expense-total");
+const outcomeTotalEl = document.querySelector(".outcome-total");
 const incomeEl = document.querySelector("#income-tracker");
 const expenseEl = document.querySelector("#expense-tracker");
-constList = document.querySelector("#all");
+const list = document.querySelector("#all");
 const incomeList = document.querySelector("#income-tracker .list");
 const expenseList = document.querySelector("#expense-tracker .list");
 const allList = document.querySelector("#all .list");
@@ -90,18 +90,25 @@ function budgetIn(e) {
     amount: parseFloat(incomeAmount.value),
   };
   ENTRY_LIST.push(income);
-  console.log(income);
 
-  updateUI();
   clearInput([incomeTitle, incomeAmount]);
+  updateUI();
 }
 
 //updateUI
 function updateUI() {
   income = calculateTotal("income", ENTRY_LIST);
   outcome = calculateTotal("expense", ENTRY_LIST);
-  balance = calculateBalance(income, outcome);
-  console.log([balance, income, outcome]);
+  balance = Math.abs(calculateBalance(income, outcome));
+  let sign = income >= outcome ? "$" : "-$";
+
+  // Updating the UI
+
+  incomeTotalEl.innerHTML = `<p>$</p><p>${income}</p>`;
+  outcomeTotalEl.innerHTML = `<p>$</p><p>${outcome}</p>`;
+  balanceEl.innerHTML = `<p>${sign}</p><p>${balance}</p>`;
+
+  clearElement([expenseList, incomeList, allList]);
 }
 //clearinput function
 function clearInput(inputs) {
